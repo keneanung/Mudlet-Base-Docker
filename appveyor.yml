@@ -1,0 +1,9 @@
+version: 1.0.{build}
+image: Visual Studio 2017
+
+install:
+  - docker version
+
+build_script:
+  - git clone https://github.com/Mudlet/Mudlet.git
+  - docker build -t keneanung/mudlet-base-docker-windows .
