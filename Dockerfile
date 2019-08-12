@@ -16,4 +16,4 @@ RUN powershell -Command cd C:\src\Mudlet\CI; `
    CheckAndInstallPython; `
    cd ..\..; `
    dir; `
-   Get-ChildItem C:\src\ -recurse | remove-item
+   [IO.Directory]::Delete((Resolve-Path "C:\src").ProviderPath, $true)
