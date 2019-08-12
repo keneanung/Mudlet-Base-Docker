@@ -2,8 +2,7 @@
 
 FROM keneanung/qt-windows:5.12.3-mingw-x86
 
-RUN powershell -Command New-Item -Path 'C:\src\Mudlet' -ItemType Directory
-COPY Mudlet C:/src/Mudlet/
+COPY Mudlet/CI/appveyor.functions.ps1 C:/src/Mudlet/CI/
 RUN setx PATH "%MINGW_BASE_DIR%\bin;C:\Python27;C:\Program Files (x86)\CMake\bin;C:\MinGW\bin;C:\MinGW\msys\1.0\bin;C:\Program Files\7-Zip;%PATH%"
 RUN powershell -Command cd C:\src\Mudlet\CI; `
    [Net.ServicePointManager]::SecurityProtocol = [System.Security.Authentication.SslProtocols] 'tls, tls11, tls12'; `
