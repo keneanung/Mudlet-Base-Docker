@@ -1,9 +1,20 @@
 version: 1.0.{build}
 image: Visual Studio 2017
 
+environment:
+  DOCKER_PASS:
+    secure: 2zGJE9haG3rnIgDPVHvvMQ==
+
+init:
+  - ps: $Env:DATE_TAG = Get-Date -format yyyyddmm
+  - echo "Building docker image %DATE_TAG%
+
 install:
   - docker version
 
 build_script:
   - git clone https://github.com/Mudlet/Mudlet.git
-  - docker build -t keneanung/mudlet-base-docker-windows .
+  - docker build -t keneanung/mudlet-base-docker-windows:latest -t keneanung/mudlet-base-docker-windows:%DATE_TAG% .
+  - docker login -u keneanung -p "%DOCKER_PASS%"
+  - docker push keneanung/mudlet-base-docker-windows:latest
+  - docker push keneanung/mudlet-base-docker-windows:%DATE_TAG%
